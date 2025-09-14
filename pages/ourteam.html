@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team - GhostFrame</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  color: #fff;
+  text-align: center;
+  background: url('https://cdn.discordapp.com/attachments/1416256660422262817/1416458120569421937/simple-planet-background-f1d0tnj4wkpbk55c.gif?ex=68c6eaec&is=68c5996c&hm=c9c8404d42d3e1ff26f595ebb3f645489e777e217a2173d985904b946074fa94') no-repeat center center fixed;
+  background-size: cover;
+}
+h1 {
+  margin-top: 40px;
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px #999;
+}
+/* Team grid */
+.team {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+.card {
+  background: rgba(17,17,17,0.85);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  width: 220px;
+  transition: transform 0.2s;
+}
+.card:hover { transform: scale(1.05); }
+.card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+  border: 2px solid #333;
+}
+.name { font-size: 1.2rem; font-weight: bold; margin: 5px 0; }
+.role { font-size: 0.9rem; color: #aaa; }
+.bio { font-size: 0.85rem; margin-top: 10px; color: #ddd; }
+/* Back button */
+.back-btn {
+  display: inline-block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: rgba(34,34,34,0.85);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.back-btn:hover { background: rgba(68,68,68,0.85); }
+</style>
+</head>
+<body>
+
+<h1>Our Team</h1>
+
+<div class="team">
+  <!-- Massacre -->
+  <div class="card">
+    <img src="https://cdn.discordapp.com/attachments/1402438728844054601/1416454747174469723/cee9f0068bee9465d149039192aad448.gif" alt="Massacre">
+    <div class="name">Massacre</div>
+    <div class="role">Owner</div>
+    <div class="bio">Massacre is the founder and leader of GhostFrame.</div>
+  </div>
+
+  <!-- Poster Boy -->
+  <div class="card">
+    <img src="https://placehold.co/200x200/333/fff.gif?text=Poster+Boy" alt="Poster Boy">
+    <div class="name">Poster Boy</div>
+    <div class="role">Co-Owner</div>
+    <div class="bio">Poster Boy supports Massacre and helps run GhostFrame.</div>
+  </div>
+
+  <!-- Francys -->
+  <div class="card">
+    <img src="https://placehold.co/200x200/555/fff.gif?text=Francys" alt="Francys">
+    <div class="name">Francys</div>
+    <div class="role">Member</div>
+    <div class="bio">Francys is a trusted member of the crew.</div>
+  </div>
+</div>
+
+<a href="../index.html" class="back-btn">← Back to Home</a>
+
+</body>
+</html>
