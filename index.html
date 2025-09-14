@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GhostFrame</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  color: #fff;
+  text-align: center;
+  background: url('https://cdn.discordapp.com/attachments/1400002049919291423/1414125634262667316/221818.gif?ex=68be6ea0&is=68bd1d20&hm=fc8b6a70cde00b27c4119e9696afa3f4b09406a700e42f072cc3561ced46fe0f') no-repeat center center fixed;
+  background-size: cover;
+  overflow-x: hidden;
+}
+
+/* Typing header */
+h1.typing {
+  font-size: 2.5rem;
+  margin-top: 60px;
+  text-shadow: 0 0 10px #999;
+  border-right: 2px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  display: inline-block;
+  animation: typing 3s steps(9,end) forwards, blink 0.7s step-end infinite;
+}
+@keyframes typing { from { width:0 } to { width:9ch } }
+@keyframes blink { 0%,100%{border-color:transparent} 50%{border-color:white} }
+
+/* Member roster */
+.roster {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+.member-card {
+  background: rgba(17,17,17,0.85);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.6);
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: 220px;
+}
+.member-card:hover { transform: scale(1.05); }
+.member-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
+  border: 2px solid #333;
+}
+.member-card .name { font-size:1.2rem; font-weight:bold; margin:5px 0; }
+.member-card .role { font-size:0.9rem; color:#aaa; }
+
+/* Modals */
+.overlay {
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
+  background: rgba(0,0,0,0.85);
+  display:none; justify-content:center; align-items:center;
+  z-index:1000;
+}
+.overlay.active { display:flex; }
+.modal {
+  background: rgba(17,17,17,0.9);
+  padding: 20px 40px;
+  border-radius:16px;
+  box-shadow:0 0 20px rgba(0,0,0,0.8);
+  text-align:center;
+  width:300px;
+}
+.modal h2 { margin-bottom:20px; font-size:1.5rem; text-shadow:0 0 5px #888; }
+.close-btn {
+  margin-top:15px; background: rgba(68,68,68,0.85);
+  padding:8px 15px; border:none; border-radius:8px;
+  color:#fff; cursor:pointer; transition:0.2s;
+}
+.close-btn:hover { background: rgba(102,102,102,0.85); }
+
+/* Clock */
+#clock {
+  position: fixed; bottom:15px; right:20px;
+  font-family:'Courier New', monospace; font-size:1rem;
+  color:#fff; background: rgba(0,0,0,0.5);
+  padding:6px 12px; border-radius:8px;
+  box-shadow:0 0 10px rgba(0,0,0,0.6);
+}
+
+/* Skid Archives top-right button */
+#archiveBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: rgba(34,34,34,0.85);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:0.2s;
+}
+#archiveBtn:hover { background: rgba(68,68,68,0.85); }
+
+/* Archive buttons inside modal */
+.archive-buttons { display:flex; flex-direction:column; gap:10px; }
+.archive-buttons button {
+  background: rgba(34,34,34,0.85);
+  color: #fff;
+  border:none; padding:10px; border-radius:6px; cursor:pointer;
+}
+.archive-buttons button:hover { background: rgba(68,68,68,0.85); }
+</style>
+</head>
+<body>
+
+<h1 class="typing">GhostFrame</h1>
+
+<!-- Background audio -->
+<audio autoplay loop>
+  <source src="media/song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Skid Archives Button -->
+<button id="archiveBtn">GhostFrame</button>
+
+<!-- Archive Modal -->
+<div class="overlay" id="archivesModal">
+  <div class="modal">
+    <h2>GhostFrame Archives</h2>
+    <div class="archive-buttons">
+      <button onclick="window.location.href='pages/ourteam.html'">Our Team</button>
+      <button onclick="window.location.href='pages/shop.html'">Shop</button>
+    </div>
+    <button class="close-btn">Close</button>
+  </div>
+</div>
+
+<!-- Member roster -->
+<div class="roster">
+  <div class="member-card" data-bio="massacre">
+    <img src="https://cdn.discordapp.com/attachments/1402438728844054601/1416454747174469723/cee9f0068bee9465d149039192aad448.gif" alt="Massacre">
+    <div class="name">Massacre</div>
+    <div class="role">Owner</div>
+  </div>
+  <div class="member-card" data-bio="posterboy">
+    <img src="https://cdn.discordapp.com/attachments/1400002049919291423/a_37b56f87b0a.png" alt="Poster Boy">
+    <div class="name">Poster Boy</div>
+    <div class="role">Member</div>
+  </div>
+  <div class="member-card" data-bio="francys">
+    <img src="https://cdn.discordapp.com/attachments/1402438728844054601/1416454747174469723/cee9f0068bee9465d149039192aad448.gif" alt="Francys">
+    <div class="name">Francys</div>
+    <div class="role">Member</div>
+  </div>
+</div>
+
+<!-- Bio modals -->
+<div class="overlay" id="bio-massacre">
+  <div class="modal">
+    <img src="https://cdn.discordapp.com/attachments/1402438728844054601/1416454747174469723/cee9f0068bee9465d149039192aad448.gif" width="100">
+    <h2>Massacre</h2>
+    <p><strong>Role:</strong> Owner</p>
+    <p>This is the bio for Massacre.</p>
+    <button class="close-btn">Close</button>
+  </div>
+</div>
+
+<div class="overlay" id="bio-posterboy">
+  <div class="modal">
+    <img src="https://cdn.discordapp.com/attachments/1400002049919291423/a_37b56f87b0a.png" width="100">
+    <h2>Poster Boy</h2>
+    <p><strong>Role:</strong> Member</p>
+    <p>This is the bio for Poster Boy.</p>
+    <button class="close-btn">Close</button>
+  </div>
+</div>
+
+<div class="overlay" id="bio-francys">
+  <div class="modal">
+    <img src="https://cdn.discordapp.com/attachments/1402438728844054601/1416454747174469723/cee9f0068bee9465d149039192aad448.gif" width="100">
+    <h2>Francys</h2>
+    <p><strong>Role:</strong> Member</p>
+    <p>This is the bio for Francys.</p>
+    <button class="close-btn">Close</button>
+  </div>
+</div>
+
+<!-- Clock -->
+<div id="clock"></div>
+
+<script>
+// Clock
+function updateClock() {
+  const clock = document.getElementById("clock");
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2,'0');
+  const minutes = String(now.getMinutes()).padStart(2,'0');
+  const seconds = String(now.getSeconds()).padStart(2,'0');
+  clock.textContent = `${hours}:${minutes}:${seconds}`;
+}
+setInterval(updateClock,1000);
+updateClock();
+
+// Member card modals
+document.querySelectorAll('.member-card').forEach(card => {
+  card.addEventListener('click',()=>{
+    const bioId = card.getAttribute('data-bio');
+    document.getElementById('bio-'+bioId).classList.add('active');
+  });
+});
+document.querySelectorAll('.overlay .close-btn').forEach(btn=>{
+  btn.addEventListener('click', e=>{
+    e.target.closest('.overlay').classList.remove('active');
+  });
+});
+
+// Archive modal
+document.getElementById('archiveBtn').addEventListener('click',()=>{
+  document.getElementById('archivesModal').classList.add('active');
+});
+document.querySelector('#archivesModal .close-btn').addEventListener('click',()=>{
+  document.getElementById('archivesModal').classList.remove('active');
+});
+</script>
+
+</body>
+</html>
